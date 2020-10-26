@@ -1,16 +1,20 @@
-LBParticles - A simple plugin for adding particles to your server
+LBParticles
 ===========
 
-## This plugin allows a user to add particles to their server. The commands are simple:
+A simple plugin for adding particles to your PocketMine-MP server.
+
+## Commands:
 
 | Command | Sub Command | User | Params | Description |
 |:-------:|:-----------:|:----:|:------:|:-----------:|
 |`lbparticles`|`give`|`<name>`|`LavaParticleEffect, PortalParticleEffect, RainbowParticleEffect, RedstoneParticleEffect`| Spawns a player's particle |
 |`lbparticles`|`remove`|`<name>`|    | Removes a player's particles |
 
-## The plugin can also be accessed by its API
+## API
 
-```
+This plugin can be also accessed by its API.
+
+```php
 $LBParticles = Server::getInstance()->getPluginManager()->getPlugin('LBParticles');
 
 // Give a particle
