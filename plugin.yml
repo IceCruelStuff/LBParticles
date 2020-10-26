@@ -1,6 +1,6 @@
 name: LBParticles
 main: LBParticles\Main
-version: 0.0.1
+version: 1.0.0-beta
 api: [3.0.0]
 load:
 author: LBSG
