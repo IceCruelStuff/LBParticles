@@ -31,13 +31,14 @@ class Main extends PluginBase implements Listener {
      * @type array
      */
     public $particle = [];
+    public $manager;
 
     /**
      * Loads the plugin
      *
      * @return null
      */
-    public function onLoad() {
+    public function onLoad(): void {
         $this->getLogger()->info(TextFormat::WHITE . "Loaded");
     }
 
@@ -46,7 +47,7 @@ class Main extends PluginBase implements Listener {
      *
      * @return null
      */
-    public function onEnable() {
+    public function onEnable(): void {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
         $this->reloadConfig();
