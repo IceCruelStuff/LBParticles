@@ -3,6 +3,9 @@ LBParticles
 
 A simple plugin for adding particles to your PocketMine-MP server.
 
+## Installation
+Download the latest build from **[Poggit CI](https://poggit.pmmp.io/ci/IceCruelStuff/LBParticles)**.
+
 ## Commands:
 
 | Command | Sub Command | User | Params | Description |
