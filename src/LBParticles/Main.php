@@ -54,7 +54,7 @@ class Main extends PluginBase implements Listener {
         /**
          * Disable the plugin if it's disabled in the plugin
          */
-        if($this->getConfig()->get('particles') == false) {
+        if ($this->getConfig()->get('particles') == false) {
             $this->setEnabled(false);
             return;
         }
@@ -68,7 +68,7 @@ class Main extends PluginBase implements Listener {
         /**
          * Load users that have a particle effect from the config
          */
-        foreach($this->getConfig()->get('users') as $user => $effect) {
+        foreach ($this->getConfig()->get('users') as $user => $effect) {
             $this->players[$user] = $effect;
         }
 
@@ -84,11 +84,11 @@ class Main extends PluginBase implements Listener {
      * @param  array         $args    An array of arguments
      * @return boolean                True allows the command to go through, false sends an error
      */
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) {
         $subcommand = strtolower(array_shift($args));
         switch ($subcommand) {
             case "give";
-                if(count($args) < 1){
+                if (count($args) < 1) {
                     array_unshift($args, $sender->getDisplayName());
                 }
 
@@ -96,7 +96,7 @@ class Main extends PluginBase implements Listener {
                  * Check perms, then give particles
                  */
                 if (!$this->getConfig()->get('onlyOp') || $sender->hasPermission("lbparticles")) {
-                    if($this->giveParticle(...$args)) {
+                    if ($this->giveParticle(...$args)) {
                         $sender->sendMessage(TextFormat::BLUE . '[LBParticles] ' . $args[0] . ' has a new particle effect!');
                     } else {
                         $this->getServer()->broadcastMessage(TextFormat::BLUE . '[LBParticles] Unable to give ' . $args[0] . ' a new particle effect!');
@@ -107,7 +107,7 @@ class Main extends PluginBase implements Listener {
                 $sender->sendMessage(TextFormat::RED . "[LBParticles] You don't have permissions to do that...");
                 return true;
             case "remove":
-                if(count($args) < 1){
+                if (count($args) < 1) {
                     array_unshift($args, $sender->getDisplayName());
                 }
 
@@ -116,7 +116,7 @@ class Main extends PluginBase implements Listener {
                  */
                 if (!$this->getConfig()->get('onlyOp') || $sender->hasPermission("lbparticles")) {
                     $args[] = true;
-                    if($this->removeParticle(...$args)) {
+                    if ($this->removeParticle(...$args)) {
                         $sender->sendMessage(TextFormat::RED . '[LBParticles] ' . $args[0] . '\'s particle effect was removed!');
                     } else {
                         $sender->sendMessage(TextFormat::RED . '[LBParticles] Unable to remove ' . $args[0] . '\'s particle effect!');
@@ -176,8 +176,8 @@ class Main extends PluginBase implements Listener {
      * @return boolean          Whether or not giving the particles was successful
      */
     public function giveParticle($user = '', $particle = '') {
-        if(($player = $this->getServer()->getPlayerExact($user)) instanceof Player) {
-            if(!isset($this->particles[$player->getDisplayName()])) {
+        if (($player = $this->getServer()->getPlayerExact($user)) instanceof Player) {
+            if (!isset($this->particles[$player->getDisplayName()])) {
                 $name = $this->getParticleClass($particle);
                 $this->particles[$player->getDisplayName()] = $this->manager->setPlayerParticleEffect($player, $this->manager::$$name);
                 $this->players[$player->getDisplayName()] = get_class($this->particles[$player->getDisplayName()]);
@@ -195,11 +195,11 @@ class Main extends PluginBase implements Listener {
      * @return boolean        Whether or not the command was successful
      */
     public function removeParticle($user = '', $unset = false) {
-        if(($player = $this->getServer()->getPlayerExact($user)) instanceof Player) {
-            if(isset($this->particles[$player->getDisplayName()])) {
+        if (($player = $this->getServer()->getPlayerExact($user)) instanceof Player) {
+            if (isset($this->particles[$player->getDisplayName()])) {
                 unset($this->particles[$player->getDisplayName()]);
                 $this->manager->removeEffect($player);
-                if($unset) {
+                if ($unset) {
                     unset($this->players[$player->getDisplayName()]);
                 }
                 return true;
@@ -216,7 +216,7 @@ class Main extends PluginBase implements Listener {
     public function getParticleClass($particle) {
         $path = explode('\\', $particle);
         $particle = array_pop($path);
-        switch($particle) {
+        switch ($particle) {
             case 'LavaParticleEffect':
                 $var = 'lava';
                 break;
@@ -247,4 +247,5 @@ class Main extends PluginBase implements Listener {
 
         $this->getLogger()->info(TextFormat::DARK_RED . "Disabled");
     }
+
 }

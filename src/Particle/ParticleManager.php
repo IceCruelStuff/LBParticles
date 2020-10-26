@@ -7,6 +7,7 @@ use Particle\effects\ParticleEffect;
 use Particle\effects\PortalParticleEffect;
 use Particle\effects\RainbowParticleEffect;
 use Particle\effects\RedstoneParticleEffect;
+use LBParticles\Main;
 
 /**
  * The ParticleManager to manage the particle effects
@@ -72,11 +73,11 @@ class ParticleManager {
 	 *
 	 * @param LBParticles\Main $plugin The parent plugin
 	 */
-	public function __construct($plugin) {
+	public function __construct(Main $plugin) {
 		self::initParticleEffects();
 		$this->plugin = $plugin;
 		$this->task = new ParticleTask($this->plugin);
-		$this->plugin->getServer()->getScheduler()->scheduleRepeatingTask($this->task, 3);
+		$this->plugin->getScheduler()->scheduleRepeatingTask($this->task, 3);
 	}
 
 	/**
