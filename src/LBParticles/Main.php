@@ -87,7 +87,7 @@ class Main extends PluginBase implements Listener {
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         $subcommand = strtolower(array_shift($args));
         switch ($subcommand) {
-            case "give";
+            case "give":
                 if (count($args) < 1) {
                     array_unshift($args, $sender->getDisplayName());
                 }
